@@ -1,0 +1,5 @@
+Touch Sensor 		- S1
+Sound Sensor 		- S2
+Light Sensor 		- S3
+Ultrasonic Sensor 	- S4
+
