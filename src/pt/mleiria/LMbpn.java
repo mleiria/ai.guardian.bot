@@ -109,9 +109,12 @@ public class LMbpn {
 		for(j = 0; j < hidden.length; j++) {
 			sum = 0;
 			for(i = 0; i < output.length; i++) {
-				
+				sum = sum + delta2[i] * w2[j][i];
 			}
+			delta1[j] = hidden[j] * ( 1 - hidden[j]) * sum;
 		}
+		
+		//Adjust weights w2
 	}
 
 }
