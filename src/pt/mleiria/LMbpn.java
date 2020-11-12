@@ -115,6 +115,55 @@ public class LMbpn {
 		}
 		
 		//Adjust weights w2
+		for(i = 0; i < hidden.length; i++) {
+			for(j = 0; j < output.length; j++) {
+				w2[i][j] = w2[i][j] + 0.35 * delta2[j] * hidden[i];
+			}
+		}
+		
+		//Adjust weights w1
+		for(i = 0; i < input.length; i++) {
+			for(j = 0; j < hidden.length; j++) {
+				w1[i][j] = w1[i][j] + 0.35 * delta1[j] * input[i];
+			}
+		}
 	}
+	
+	public static void test(int[] inp, int[] out) {
+		int i;
+		int j;
+		double sum;
+		
+		//Initialize input units
+		for(i = 0; i < inp.length; i++) {
+			input[i] = inp[i];
+		}
+		
+		//Calculate hidden units
+		for(j = 0; j < hidden.length - 1; j++) {
+			sum = 0;
+			for(i = 0; i < input.length; i++) {
+				sum = sum + w1[i][j] * input[i];
+			}
+			hidden[j] = 1 / (1 + Math.exp(-sum));
+		}
+		
+		//Calculate output units
+		for(j = 0; j < output.length; j++) {
+			sum = 0;
+			for(i = 0; i < hidden.length; i++) {
+				sum = sum + w2[i][j] * hidden[i];
+			}
+			output[j] = 1 / ( 1 + Math.exp(-sum));
+		}
+		
+		//Assign output to param out[]
+		for(i = 0; i < output.length; i++) {
+			out[i] = output[i] >= 0.5 ? 1 : 0; 
+			
+		}
+	}
+	
+	
 
 }
